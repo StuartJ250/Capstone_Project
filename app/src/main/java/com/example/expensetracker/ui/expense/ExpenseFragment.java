@@ -1,6 +1,7 @@
 package com.example.expensetracker.ui.expense;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -32,7 +34,10 @@ import com.example.expensetracker.entities.Expense;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class ExpenseFragment extends Fragment {
 
@@ -44,6 +49,9 @@ public class ExpenseFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
     private ImageView ivReceipt;
     private ExpenseViewModel expenseViewModel;
+
+    private EditText expenseDate;
+    private Calendar calendar;
 
     public ExpenseFragment(){
 
@@ -73,8 +81,35 @@ public class ExpenseFragment extends Fragment {
 
         btnSubmitExpense.setOnClickListener(v -> saveExpense());
 
+        expenseDate = view.findViewById(R.id.expenseDate);
+        calendar = Calendar.getInstance();
+
+        expenseDate.setOnClickListener(v -> showDatePickerDialog());
+
         return view;
 
+    }
+
+    private void showDatePickerDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                requireContext(),
+                (view, year, month, dayOfMonth) -> {
+                    calendar.set(Calendar.YEAR, year);
+                    calendar.set(Calendar.MONTH, month);
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateDateField();
+                },
+
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    private void updateDateField(){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yy", Locale.getDefault());
+        expenseDate.setText(sdf.format(calendar.getTime()));
     }
 
     public void spinnerSetup(){
@@ -123,7 +158,15 @@ public class ExpenseFragment extends Fragment {
                     Intent data = result.getData();
                     if (data != null) {
                         Uri selectedImageUri = data.getData();
-                        ivReceipt.setImageURI(selectedImageUri);
+                        try {
+                            Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), selectedImageUri);
+                            imagePath = saveImage(bitmap);
+                            ivReceipt.setImageBitmap(bitmap);
+                            ivReceipt.setImageURI(selectedImageUri);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });
@@ -150,6 +193,7 @@ public class ExpenseFragment extends Fragment {
         String vendor = vendorName.getText().toString();
         String mDescription = description.getText().toString();
         String amountString = amountSpent.getText().toString();
+        String mExpenseDate = expenseDate.getText().toString();
 
         // validate values are filled out
         if (name.isEmpty() || vendor.isEmpty() || amountString.isEmpty()) {
@@ -157,7 +201,7 @@ public class ExpenseFragment extends Fragment {
             return;
         }
         double amountDouble = Double.parseDouble(amountString);
-        Expense expense = new Expense(name, vendor, selectedCategory, mDescription, amountDouble, selectedPaymentMethod, imagePath);
+        Expense expense = new Expense(name, vendor, selectedCategory, mDescription, amountDouble, selectedPaymentMethod, imagePath, mExpenseDate);
 
         //inserts into database
         expenseViewModel.insertExpense(expense);

@@ -3,11 +3,17 @@ package com.example.expensetracker.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 @Entity(tableName = "expenses")
 public class Expense {
     @PrimaryKey(autoGenerate = true)
     private int expenseID;
     private String name;
+    private String expenseDate;
+    private String timeStamp;
     private String vendor;
     private String category;
     private String description;
@@ -16,7 +22,7 @@ public class Expense {
     private String receiptImagePath; //file path
 
     //Constructor
-    public Expense(String name, String vendor, String category, String description, double amountSpent, String paymentMethod, String receiptImagePath){
+    public Expense(String name, String vendor, String category, String description, double amountSpent, String paymentMethod, String receiptImagePath, String expenseDate){
         this.name = name;
         this.vendor = vendor;
         this.category = category;
@@ -24,6 +30,8 @@ public class Expense {
         this.amountSpent = amountSpent;
         this.paymentMethod = paymentMethod;
         this.receiptImagePath = receiptImagePath;
+        this.expenseDate = expenseDate;
+        this.timeStamp = getCurrentTimeStamp();
     }
 
 
@@ -88,7 +96,20 @@ public class Expense {
         return receiptImagePath;
     }
 
+    public String getExpenseDate() { return expenseDate; }
+
+    public void setExpenseDate(String expenseDate) {this.expenseDate = expenseDate;}
+
+    public String getTimeStamp() {return timeStamp;}
+
+    public void setTimeStamp(String timeStamp) {this.timeStamp = timeStamp;}
+
     public void setReceiptImagePath(String receiptImagePath) {
         this.receiptImagePath = receiptImagePath;
+    }
+
+    private String getCurrentTimeStamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return sdf.format(new Date());
     }
 }

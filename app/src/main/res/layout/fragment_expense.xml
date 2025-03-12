@@ -5,93 +5,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.expense.ExpenseFragment">
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
-
-        <!-- Expense Name -->
-        <EditText
-            android:id="@+id/expenseName"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Purchase Name"
-            android:inputType="text"/>
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
 
-        <!-- Vendor Name -->
-        <EditText
-            android:id="@+id/vendorName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Vendor"
-            android:inputType="text"/>
+            <!-- Expense Name -->
+            <EditText
+                android:id="@+id/expenseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Purchase Name"
+                android:inputType="text"/>
 
-        <!-- Category -->
-        <Spinner
-            android:id = "@+id/spinnerCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown"
-            android:text = "Category"/>
+            <EditText
+                android:id="@+id/expenseDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Expense Date"
+                android:focusable="false"
+                android:inputType="none"
+                android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+                android:padding = "10dp"
+                android:background="@android:drawable/editbox_background"/>
 
-        <!-- Description -->
-        <EditText
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description"
-            android:inputType="text" />
+            <!-- Vendor Name -->
+            <EditText
+                android:id="@+id/vendorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Vendor"
+                android:inputType="text"/>
 
-        <!-- Amount Spent -->
-        <EditText
-            android:id="@+id/amountSpent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Amount Spent"
-            android:inputType="numberDecimal"/>
+            <!-- Category -->
+            <Spinner
+                android:id = "@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:text = "Category"/>
 
-        <!-- Payment Method -->
-        <Spinner
-            android:id="@+id/spinnerPaymentMethod"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Payment Method"
-            android:spinnerMode="dropdown"/>
+            <!-- Description -->
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:inputType="text" />
 
-        <!-- Receipt Image Selection -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload Receipt"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="10dp"/>
+            <!-- Amount Spent -->
+            <EditText
+                android:id="@+id/amountSpent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Amount Spent"
+                android:inputType="numberDecimal"/>
 
-        <ImageView
-            android:id="@+id/ivReceipt"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:background="@android:color/darker_gray"/>
+            <!-- Payment Method -->
+            <Spinner
+                android:id="@+id/spinnerPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Payment Method"
+                android:spinnerMode="dropdown"/>
 
-        <Button
-            android:id="@+id/btnUploadImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Choose Image"/>
+            <!-- Receipt Image Selection -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload Receipt"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="10dp"/>
 
-        <!-- Submit Button -->
-        <Button
-            android:id="@+id/btnSubmitExpense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Submit Expense"
-            android:layout_marginTop="10dp"/>
+            <ImageView
+                android:id="@+id/ivReceipt"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:background="@android:color/darker_gray"/>
+
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Image"/>
+
+            <!-- Submit Button -->
+            <Button
+                android:id="@+id/btnSubmitExpense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Expense"
+                android:layout_marginTop="10dp"/>
 
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
