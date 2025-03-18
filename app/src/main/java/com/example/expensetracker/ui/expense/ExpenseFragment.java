@@ -3,6 +3,7 @@ package com.example.expensetracker.ui.expense;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.expensetracker.R;
+import com.example.expensetracker.database.ExpenseDatabase;
 import com.example.expensetracker.databinding.FragmentExpenseBinding;
 import com.example.expensetracker.entities.Expense;
 
@@ -49,6 +51,7 @@ public class ExpenseFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
     private ImageView ivReceipt;
     private ExpenseViewModel expenseViewModel;
+
 
     private EditText expenseDate;
     private Calendar calendar;
@@ -195,16 +198,25 @@ public class ExpenseFragment extends Fragment {
         String amountString = amountSpent.getText().toString();
         String mExpenseDate = expenseDate.getText().toString();
 
+        SharedPreferences preferences = requireActivity().getSharedPreferences("user_prefs", requireActivity().MODE_PRIVATE);
+        int userID = preferences.getInt("userID", -1);
+
+        if(userID == -1) {
+            Toast.makeText(getContext(), "Error! No login detected!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // validate values are filled out
         if (name.isEmpty() || vendor.isEmpty() || amountString.isEmpty()) {
             Toast.makeText(getContext(), "Please complete the required fields", Toast.LENGTH_SHORT).show();
             return;
         }
         double amountDouble = Double.parseDouble(amountString);
-        Expense expense = new Expense(name, vendor, selectedCategory, mDescription, amountDouble, selectedPaymentMethod, imagePath, mExpenseDate);
+        Expense expense = new Expense(name, vendor, selectedCategory, mDescription, amountDouble, selectedPaymentMethod, imagePath, mExpenseDate, userID);
 
         //inserts into database
-        expenseViewModel.insertExpense(expense);
+        new Thread(() ->
+                ExpenseDatabase.getInstance(getContext()).expenseDao().insert(expense)).start();
 
         // notify user of save
         Toast.makeText(getContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();

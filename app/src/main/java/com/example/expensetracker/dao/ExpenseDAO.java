@@ -26,4 +26,7 @@ public interface ExpenseDAO {
 
     @Query("SELECT * FROM expenses ORDER BY expenseID DESC")
     LiveData<List<Expense>> getAllExpenses();
+
+    @Query("SELECT * FROM expenses WHERE userID = :uID ORDER BY expenseID ASC")
+    LiveData<List<Expense>> getAssociatedExpenses(int uID);
 }

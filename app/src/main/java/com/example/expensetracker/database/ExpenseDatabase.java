@@ -8,14 +8,17 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.expensetracker.dao.ExpenseDAO;
+import com.example.expensetracker.dao.LoginDAO;
 import com.example.expensetracker.entities.Expense;
+import com.example.expensetracker.entities.Login;
 
-@Database(entities = {Expense.class}, version = 1, exportSchema = false)
+@Database(entities = {Expense.class, Login.class}, version = 2, exportSchema = false)
 public abstract class ExpenseDatabase extends RoomDatabase{
 
     private static volatile ExpenseDatabase INSTANCE;
 
     public abstract ExpenseDAO expenseDao();
+    public abstract LoginDAO loginDAO();
 
     public static ExpenseDatabase getInstance(Context context) {
         if (INSTANCE == null){
