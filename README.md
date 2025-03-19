@@ -96,3 +96,13 @@ To submit your recording, upload it to the Panopto drop box titled Software Engi
 - Updated remaining TextView on nav_header_main.xml on line 15-20
 - Added button to nav_header_main.xml on lines 22-29
 - Added code to MainActivity.java for new addition functionality on lines 28-30, 51-73, 85-94
+
+
+- 4th commit
+- Added code to ReportFragment.java for search and recyclerview on lines 29-82
+- Added code to ReportView.java on lines 16-37
+- Created ReportAdapter.java in report package
+- Created item_expense.xml in layout package
+- Added code to fragment_report.xml to add search bar and recyclerview on lines 9-61
+- Added query to ExpenseDAO.java on lines 32-35
+- Updated Expense.java to add userID as an Index on line 21

@@ -29,4 +29,8 @@ public interface ExpenseDAO {
 
     @Query("SELECT * FROM expenses WHERE userID = :uID ORDER BY expenseID ASC")
     LiveData<List<Expense>> getAssociatedExpenses(int uID);
+
+    @Query("SELECT * FROM expenses WHERE userID = :uID AND (name LIKE '%' || :searchQuery || '%' OR description LIKE '%' || :searchQuery || '%') ORDER BY expenseID ASC")
+    LiveData<List<Expense>> getSearchExpenses(int uID, String searchQuery);
+
 }

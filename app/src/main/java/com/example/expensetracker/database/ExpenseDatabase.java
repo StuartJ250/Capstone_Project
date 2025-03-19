@@ -12,7 +12,7 @@ import com.example.expensetracker.dao.LoginDAO;
 import com.example.expensetracker.entities.Expense;
 import com.example.expensetracker.entities.Login;
 
-@Database(entities = {Expense.class, Login.class}, version = 2, exportSchema = false)
+@Database(entities = {Expense.class, Login.class}, version = 3, exportSchema = false)
 public abstract class ExpenseDatabase extends RoomDatabase{
 
     private static volatile ExpenseDatabase INSTANCE;

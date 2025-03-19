@@ -1,14 +1,25 @@
 package com.example.expensetracker.entities;
 
+
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-@Entity(tableName = "expenses", foreignKeys = @ForeignKey(entity = Login.class, parentColumns = "userID", childColumns = "userID", onDelete = ForeignKey.CASCADE))
+@Entity(
+        tableName = "expenses",
+        foreignKeys = @ForeignKey(
+                entity = Login.class,
+                parentColumns = "userID",
+                childColumns = "userID",
+                onDelete = ForeignKey.CASCADE),
+        indices = {@Index(value = "userID")}
+)
 public class Expense {
     @PrimaryKey(autoGenerate = true)
     private int expenseID;
@@ -20,6 +31,8 @@ public class Expense {
     private String description;
     private double amountSpent;
     private String paymentMethod;
+
+    @ColumnInfo(name = "userID")
     private int userID;  //foreign key for login
     private String receiptImagePath; //file path
 
