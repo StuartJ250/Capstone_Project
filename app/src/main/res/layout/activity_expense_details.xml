@@ -100,10 +100,17 @@
 
             <!-- Submit Button -->
             <Button
-                android:id="@+id/btnSubmitExpense"
+                android:id="@+id/btnUpdateExpense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Submit Expense"
+                android:text="Update Expense"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/btnDeleteExpense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delete Expense"
                 android:layout_marginTop="10dp"/>
 
 

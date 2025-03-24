@@ -106,3 +106,27 @@ To submit your recording, upload it to the Panopto drop box titled Software Engi
 - Added code to fragment_report.xml to add search bar and recyclerview on lines 9-61
 - Added query to ExpenseDAO.java on lines 32-35
 - Updated Expense.java to add userID as an Index on line 21
+
+
+- 5th commit
+- Cleaned up code on ReportAdapter.java to only show pertinent information
+- Created expensedetails package
+- Created ExpenseDetailsActivity.java in expensedetails package 
+- Created activity_expense_details.xml in layout package
+- Removed floating action button from app_bar_main.xml as it is unused
+- Added getExpense method to ExpenseDAO.java on lines 36-38
+- Updated recyclerView on fragment_report.xml on lines 58-60 to solve formatting issues
+- Removed some TextViews from item_expense.xml to clean up look of search functionality
+- Added onItemClick to recyclerView items in ReportFragment.java on lines 59-68, 79-84
+- Added getExpenseUser method to ReportViewModel.java on lines 38-43
+- Added expenseDetailsActivity to AndroidManifest.xml on line 28
+- Added code to HomeFragment.java on lines 23-30, 33-44 to display welcome message
+- Added code to HomeViewModel.java on lines 15-29 to accommodate welcome message
+- Added firstName and lastName to shared preferences in LoginActivity.java  on lines 58-59
+- Removed 1 item from main.xml and replaced with "send_report"
+- Added code to MainActivity.java to build functionality for exporting a report on lines 129-234
+- Added provider item to AndroidManifest.xml on lines 30-45
+- Added itext7 dependency to build.gradle.kts on line 52
+- Created file_paths.xml to xml package as not having a path was causing the export of report to fail
+- Added meta-data item to AndroidManifest.xml on lines 36-38 to link to file_paths.xml
+- Synced gradle files to verify everything is working correctly

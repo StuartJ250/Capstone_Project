@@ -55,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putBoolean("isLoggedIn", true);
                 editor.putInt("userID", login.getUserID());
                 editor.putString("userName", username);
+                editor.putString("firstName", login.getFirstName());
+                editor.putString("lastName", login.getLastName());
                 boolean isSaved = editor.commit();
 
                 if(isSaved) {

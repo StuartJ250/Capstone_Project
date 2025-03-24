@@ -1,5 +1,6 @@
 package com.example.expensetracker.ui.report;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,8 +20,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expensetracker.R;
+import com.example.expensetracker.dao.ExpenseDAO;
 import com.example.expensetracker.database.ExpenseDatabase;
 import com.example.expensetracker.databinding.FragmentReportBinding;
+import com.example.expensetracker.entities.Expense;
+import com.example.expensetracker.ui.expensedetails.ExpenseDetailsActivity;
 
 public class ReportFragment extends Fragment {
 
@@ -31,6 +35,7 @@ public class ReportFragment extends Fragment {
     private RecyclerView recyclerView;
     private ReportAdapter reportAdapter;
     private int userID;
+    private ExpenseDAO expenseDAO;
 
 
     public ReportFragment() {
@@ -50,9 +55,20 @@ public class ReportFragment extends Fragment {
         searchBar = view.findViewById(R.id.searchBar);
         btnSearch = view.findViewById(R.id.btnSearch);
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
-        reportAdapter = new ReportAdapter();
+        reportAdapter = new ReportAdapter(null, new ReportAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Expense expense) {
+                Intent intent = new Intent(getContext(), ExpenseDetailsActivity.class);
+                intent.putExtra("expenseID", expense.getExpenseID());
+                startActivity(intent);
+            }
+        });
+
+
+
+
         recyclerView.setAdapter(reportAdapter);
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("user_prefs", requireActivity().MODE_PRIVATE);
@@ -60,6 +76,12 @@ public class ReportFragment extends Fragment {
 
         if(userID ==-1){
             System.out.println("Error: User ID is not found.");
+        } else {
+            reportViewModel.getExpenseUser(userID).observe(getViewLifecycleOwner(), expenses -> {
+                if (expenses != null) {
+                    reportAdapter.setExpenses(expenses);
+                }
+            });
         }
 
         reportViewModel.getSearchResults().observe(getViewLifecycleOwner(), expenses -> {

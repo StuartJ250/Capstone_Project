@@ -35,4 +35,10 @@ public class ReportViewModel extends AndroidViewModel {
 
         });
     }
+
+    public LiveData<List<Expense>> getExpenseUser(int userID) {
+        return expenseDatabase.expenseDao().getAssociatedExpenses(userID);
+    }
+
+
 }
