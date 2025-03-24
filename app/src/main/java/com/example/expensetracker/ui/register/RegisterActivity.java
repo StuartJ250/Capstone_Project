@@ -44,8 +44,7 @@ public class RegisterActivity  extends AppCompatActivity {
         String userName = newUserName.getText().toString();
         String password = newPassword.getText().toString();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please complete all requested forms", Toast.LENGTH_SHORT).show();
+        if (!validate(firstName,lastName,userName,password)) {
             return;
         }
 
@@ -67,5 +66,30 @@ public class RegisterActivity  extends AppCompatActivity {
             });
 
         }).start();
+    }
+
+    private boolean validate(String firstName, String lastName, String userName, String password) {
+
+        if (firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please complete all requested forms", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!firstName.matches("^[A-Za-z]+$")) {
+            Toast.makeText(this,"First name can only contain letters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!lastName.matches("^[A-Za-z]+$")) {
+            Toast.makeText(this,"Last name can only contain letters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(!userName.matches("^[a-zA-z0-9]+$")) {
+            Toast.makeText(this, "Username must only contain letters and numbers", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }

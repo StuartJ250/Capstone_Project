@@ -130,3 +130,4 @@ To submit your recording, upload it to the Panopto drop box titled Software Engi
 - Created file_paths.xml to xml package as not having a path was causing the export of report to fail
 - Added meta-data item to AndroidManifest.xml on lines 36-38 to link to file_paths.xml
 - Synced gradle files to verify everything is working correctly
+- Added validation to RegisterActivity.java on lines 47, 70-94
