@@ -107,7 +107,6 @@ To submit your recording, upload it to the Panopto drop box titled Software Engi
 - Added query to ExpenseDAO.java on lines 32-35
 - Updated Expense.java to add userID as an Index on line 21
 
-
 - 5th commit
 - Cleaned up code on ReportAdapter.java to only show pertinent information
 - Created expensedetails package
@@ -131,3 +130,12 @@ To submit your recording, upload it to the Panopto drop box titled Software Engi
 - Added meta-data item to AndroidManifest.xml on lines 36-38 to link to file_paths.xml
 - Synced gradle files to verify everything is working correctly
 - Added validation to RegisterActivity.java on lines 47, 70-94
+
+- 6th commit
+- Fixed code on multiple xml files due to menu text not changing colors with theme change
+  - themes.xml on line 25
+  - strings.xml on line 13
+  - main.xml on line 7
+  - colors.xml on line 10
+  - created colors.xml (night) in colors package 
+  - deleted README.md duplicate as to not cause confusion

@@ -10,6 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_expense">Expense</string>
     <string name="menu_report">Report</string>
+    <string name="menu_send_report">Send Report</string>
 
     <string-array name="categories">
         <item>Category</item>

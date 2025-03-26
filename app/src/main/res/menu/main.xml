@@ -4,6 +4,6 @@
 
     <item
         android:id = "@+id/send_report"
-        android:title="Send Report" />
+        android:title="@string/menu_send_report" />
 
 </menu>

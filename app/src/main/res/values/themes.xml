@@ -19,7 +19,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.ExpenseTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.ExpenseTracker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="Theme.ExpenseTracker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.ExpenseTracker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/menuTextColor</item>
+    </style>
 </resources>
