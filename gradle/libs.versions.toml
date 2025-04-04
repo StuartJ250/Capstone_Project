@@ -1,5 +1,6 @@
 [versions]
 agp = "8.8.1"
+fragmentTesting = "1.8.6"
 itext7Core = "7.2.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -14,8 +15,13 @@ navigationUi = "2.8.7"
 roomCommon = "2.6.1"
 roomRuntime = "2.6.1"
 roomCompiler = "2.6.1"
+androidxTestRules = "1.6.1"
+androidxTestRunner = "1.6.2"
+espressoIntents = "3.6.1"
+androidxTestCore = "1.6.1"
 
 [libraries]
+androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "fragmentTesting" }
 itext7-core = { module = "com.itextpdf:itext7-core", version.ref = "itext7Core" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -30,6 +36,10 @@ navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version
 room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomRuntime" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTestRules" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+espresso-intents = { group = "androidx.test.espresso", name = "espresso-intents", version.ref = "espressoIntents" }
+androidx-test-core = {group = "androidx.test", name = "core", version.ref = "androidxTestCore"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

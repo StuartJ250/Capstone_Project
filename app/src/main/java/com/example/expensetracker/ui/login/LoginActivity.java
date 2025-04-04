@@ -4,9 +4,10 @@ package com.example.expensetracker.ui.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ import com.example.expensetracker.R;
 import com.example.expensetracker.database.ExpenseDatabase;
 import com.example.expensetracker.entities.Login;
 import com.example.expensetracker.ui.register.RegisterActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText xUsername, xPassword;
@@ -69,13 +71,17 @@ public class LoginActivity extends AppCompatActivity {
                 String storedUsername = preferences.getString("userName", "Guest");
                 // System.out.println("DEBUG: Username saved: " + storedUsername);
                 runOnUiThread(() -> {
-                    Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                    navigateToMainActivity();
+                    Snackbar.make(findViewById(android.R.id.content), "Login Successful!", Snackbar.LENGTH_LONG).show();
+
+                    new Handler(Looper.getMainLooper()).postDelayed(() ->{
+                        navigateToMainActivity();
+                    }, 2000);
+
                 });
             }
             else {
                 runOnUiThread(() ->
-                        Toast.makeText(this, "Invalid Username or Password", Toast.LENGTH_SHORT).show());
+                        Snackbar.make(findViewById(android.R.id.content), "Invalid Username or Password", Snackbar.LENGTH_LONG).show());
             }
         }).start();
     }

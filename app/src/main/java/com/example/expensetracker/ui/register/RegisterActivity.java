@@ -2,6 +2,8 @@ package com.example.expensetracker.ui.register;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,6 +15,7 @@ import com.example.expensetracker.database.ExpenseDatabase;
 import com.example.expensetracker.entities.Login;
 import com.example.expensetracker.ui.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class RegisterActivity  extends AppCompatActivity {
 
@@ -52,7 +55,7 @@ public class RegisterActivity  extends AppCompatActivity {
             ExpenseDatabase database = ExpenseDatabase.getInstance(getApplicationContext());
 
             if (database.loginDAO().getUserID(userName) > 0) {
-                runOnUiThread(() -> Toast.makeText(this, "Username already taken. Please choose another.", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Snackbar.make(findViewById(android.R.id.content), "Username already taken. Please choose another.", Snackbar.LENGTH_LONG).show());
                 return;
             }
 
@@ -60,9 +63,15 @@ public class RegisterActivity  extends AppCompatActivity {
             database.loginDAO().insert(newLogin);
 
             runOnUiThread(() -> {
-                Toast.makeText(this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                finish();
+                Snackbar.make(findViewById(android.R.id.content), "Registration Successful!", Snackbar.LENGTH_LONG).show();
+
+                new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }, 1500);
+
+
             });
 
         }).start();
@@ -71,22 +80,22 @@ public class RegisterActivity  extends AppCompatActivity {
     private boolean validate(String firstName, String lastName, String userName, String password) {
 
         if (firstName.isEmpty() || lastName.isEmpty() || userName.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please complete all requested forms", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content), "Please complete all requested forms", Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         if (!firstName.matches("^[A-Za-z]+$")) {
-            Toast.makeText(this,"First name can only contain letters", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content),"First name can only contain letters", Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         if (!lastName.matches("^[A-Za-z]+$")) {
-            Toast.makeText(this,"Last name can only contain letters", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content),"Last name can only contain letters", Snackbar.LENGTH_LONG).show();
             return false;
         }
 
         if(!userName.matches("^[a-zA-z0-9]+$")) {
-            Toast.makeText(this, "Username must only contain letters and numbers", Toast.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content), "Username must only contain letters and numbers", Snackbar.LENGTH_LONG).show();
             return false;
         }
 

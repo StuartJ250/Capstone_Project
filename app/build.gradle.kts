@@ -46,8 +46,20 @@ dependencies {
     implementation(libs.room.common)
     implementation(libs.room.runtime)
     testImplementation(libs.junit)
+    testImplementation(libs.ext.junit)
+    testImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.intents)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.runner)
     annotationProcessor(libs.room.compiler)
     implementation(libs.itext7.core)
+    debugImplementation(libs.androidx.fragment.testing)
+    androidTestImplementation(libs.androidx.test.core)
+    configurations.all {
+        resolutionStrategy {
+            force ("androidx.test:core:1.6.1")
+        }
+    }
 }

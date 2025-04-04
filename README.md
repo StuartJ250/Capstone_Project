@@ -139,3 +139,15 @@ To submit your recording, upload it to the Panopto drop box titled Software Engi
   - colors.xml on line 10
   - created colors.xml (night) in colors package 
   - deleted README.md duplicate as to not cause confusion
+
+- Final Commit
+  - Added LoginActivityTest.java to expense package in androidTest
+  - Added RegisterActivityTest.java to expense package in androidTest
+  - Added ExpenseFragmentTest.java to expense package in androidTest
+  - Changed pop up notifications from TOAST to Snackbar in:
+    - ExpenseFragment.java on lines 205,211,222
+    - LoginActivity.java on lines 74-79, 84
+    - RegisterActivity.java on lines 66-74, 83, 88, 93, 98
+  - Added versions and libraries to libs.versions.toml file on lines 18-21, 24, 39-42
+  - Added setTestInstance method to ExpenseDatabase.java on lines 36-39
+  - Added configurations to build.gradle.kts on lines 49-50, 53-55, 58-64

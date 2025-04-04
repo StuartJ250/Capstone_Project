@@ -32,6 +32,7 @@ import com.example.expensetracker.R;
 import com.example.expensetracker.database.ExpenseDatabase;
 import com.example.expensetracker.databinding.FragmentExpenseBinding;
 import com.example.expensetracker.entities.Expense;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -202,13 +203,13 @@ public class ExpenseFragment extends Fragment {
         int userID = preferences.getInt("userID", -1);
 
         if(userID == -1) {
-            Toast.makeText(getContext(), "Error! No login detected!", Toast.LENGTH_SHORT).show();
+            Snackbar.make(requireView(), "Error! No login detected!", Snackbar.LENGTH_LONG).show();
             return;
         }
 
         // validate values are filled out
         if (name.isEmpty() || vendor.isEmpty() || amountString.isEmpty()) {
-            Toast.makeText(getContext(), "Please complete the required fields", Toast.LENGTH_SHORT).show();
+            Snackbar.make(requireView(), "Please complete the required fields", Snackbar.LENGTH_LONG).show();
             return;
         }
         double amountDouble = Double.parseDouble(amountString);
@@ -219,7 +220,7 @@ public class ExpenseFragment extends Fragment {
                 ExpenseDatabase.getInstance(getContext()).expenseDao().insert(expense)).start();
 
         // notify user of save
-        Toast.makeText(getContext(), "Expense added successfully", Toast.LENGTH_SHORT).show();
+        Snackbar.make(requireView(), "Expense added successfully", Snackbar.LENGTH_LONG).show();
 
 
         //field reset

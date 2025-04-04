@@ -33,4 +33,8 @@ public abstract class ExpenseDatabase extends RoomDatabase{
 
         return INSTANCE;
     }
+
+    public static void setTestInstance(ExpenseDatabase testInstance){
+        INSTANCE = testInstance;
+    }
 }
