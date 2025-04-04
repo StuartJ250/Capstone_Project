@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.expensetracker"
+    namespace = "com.dset.expensetracker"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.expensetracker"
+        applicationId = "com.dset.expensetracker"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

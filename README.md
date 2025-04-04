@@ -151,3 +151,6 @@ To submit your recording, upload it to the Panopto drop box titled Software Engi
   - Added versions and libraries to libs.versions.toml file on lines 18-21, 24, 39-42
   - Added setTestInstance method to ExpenseDatabase.java on lines 36-39
   - Added configurations to build.gradle.kts on lines 49-50, 53-55, 58-64
+
+
+- slight update to registerActivity to make input type as textPassword
