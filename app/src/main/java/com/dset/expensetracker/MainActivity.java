@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sharePDF(File pdfFile){
-        Uri pdfUri = FileProvider.getUriForFile(this, "com.example.expensetracker.fileprovider", pdfFile);
+        Uri pdfUri = FileProvider.getUriForFile(this, "com.dset.expensetracker.fileprovider", pdfFile);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("application/pdf");
